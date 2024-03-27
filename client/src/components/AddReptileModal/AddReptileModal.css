@@ -1,6 +1,53 @@
+/* AddReptileModal.css */
+.modal-content {
+    background-color: #2d2d2d; /* Matches card background */
+    color: #fff; /* White text for readability */
+    border: 1px solid #663399; /* Rebecca purple border, as with the cards */
+}
 
-.modal-custom {
+.modal-header, .modal-body, .modal-footer {
+    border-bottom: 1px solid #444; /* Subtle borders within the modal */
+}
 
-    max-width: 500px; 
-    margin: auto;
+.modal-header {
+    border-bottom: none; /* No border under the header for a cleaner look */
+}
+
+/* Style the close button to fit the theme */
+.close {
+    color: #fff;
+    opacity: 1;
+}
+
+/* Buttons in the modal footer */
+.modal-footer .btn-primary {
+    background-color: #663399;
+    border-color: #663399; /* Style primary buttons with the theme color */
+}
+
+.modal-footer .btn-primary:hover {
+    background-color: #7a4d9b; /* A lighter purple on hover */
+    border-color: #7a4d9b;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #444; /* Darker gray for the secondary button */
+    border-color: #555;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: #555; /* Lighter gray on hover */
+    border-color: #666;
+}
+
+.form-control {
+    background-color: #242424;
+    border: 1px solid #444444;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    background-color: #242424;
+    border-color: #556688;
+    color: #ffffff;
 }

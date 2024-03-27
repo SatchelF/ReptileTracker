@@ -31,9 +31,6 @@ const AddReptileModal = ({ show, onClose, onCreateReptile }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">Add New Reptile</h5>
-            <button type="button" className="close" onClick={onClose} aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
