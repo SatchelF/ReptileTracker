@@ -1,0 +1,65 @@
+/* login.css */
+.login-container {
+    background-color: #242424; /* Gray background */
+    color: #ffffff; /* White text for better contrast */
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the form vertically and horizontally */
+}
+
+.login-form {
+    background-color: #333333; /* Slightly lighter gray for the form background */
+    padding: 2rem;
+    border-radius: 8px;
+    width: 50%; /* Adjust based on your preference */
+    max-width: 600px; /* Slightly wider than the login form if needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form .form-control {
+    background-color: #242424;
+    border: 1px solid #444444;
+    color: #ffffff;
+}
+
+.login-form .form-control:focus {
+    background-color: #242424;
+    border-color: #556688;
+    color: #ffffff;
+}
+
+.login-form .btn-primary {
+    background-color: #556688;
+    border-color: #445566;
+    align-self: end; /* Align the button to the form's end (right) */
+    width: auto; /* Let the button size according to its content */
+}
+
+.login-form .btn-primary:hover {
+    background-color: #667799;
+    border-color: #556688;
+    font-size: 1.25rem; 
+    border-radius: .3rem; 
+}
+
+.login-form .form-control::placeholder { 
+    color: #ccc; 
+    opacity: 1; 
+}
+
+.login-form .form-control:-ms-input-placeholder { 
+    color: #ccc;
+}
+
+
+
+.login-form label {
+    color: #ffffff;
+}
+
+.login-form {
+    padding-bottom: 2rem; 
+}

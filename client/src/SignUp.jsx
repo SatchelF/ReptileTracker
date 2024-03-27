@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useApi } from "../utils/use_api";
 import { useNavigate } from "react-router-dom";
+import './SignUp.css';
 
 export const SignUp = () => {
   const emailInputRef = useRef(null);
@@ -48,51 +49,49 @@ export const SignUp = () => {
   }
 
   return (
-    <>
-      <h2>Sign Up</h2>
-      <form className="sign-up-form" onSubmit={createUser}>
-        <input
-          placeholder="First name"
-          type="text"
-          value={firstName}
-          required
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <input
-          placeholder="Last name"
-          type="text"
-          value={lastName}
-          required
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <input
-          placeholder="Email"
-          type="email"
-          value={email}
-          required
-          onChange={(e) => {
-            setEmail(e.target.value);
-            if (emailInputRef.current) {
-              emailInputRef.current.setCustomValidity("");
-            }
-          }}
-          ref={emailInputRef}
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          required
-          onChange={(e) => {
-            setPassword(e.target.value);
-            if (emailInputRef.current) {
-              emailInputRef.current.setCustomValidity("");
-            }
-          }}
-        />
-
-        <button>Create Account</button>
-      </form>
-    </>
+    <div className="auth-container">
+      <div className="auth-form">
+        <h2>Sign Up</h2>
+        <form onSubmit={createUser}>
+          {/* FirstName and LastName inputs */}
+          <input
+            className="form-control"
+            placeholder="First name"
+            type="text"
+            value={firstName}
+            required
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <input
+            className="form-control"
+            placeholder="Last name"
+            type="text"
+            value={lastName}
+            required
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          {/* Email and Password inputs */}
+          <input
+            className="form-control"
+            placeholder="Email"
+            type="email"
+            value={email}
+            required
+            onChange={(e) => setEmail(e.target.value)}
+            ref={emailInputRef}
+          />
+          <input
+            className="form-control"
+            placeholder="Password"
+            type="password"
+            value={password}
+            required
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {/* Sign Up button */}
+          <button type="submit" className="btn btn-primary">Create Account</button>
+        </form>
+      </div>
+    </div>
   );
 };

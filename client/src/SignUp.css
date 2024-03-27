@@ -1,0 +1,63 @@
+/* SignUp.css */
+.auth-container {
+    background-color: #242424; /* Gray background */
+    color: #ffffff; /* White text for better contrast */
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center the form vertically and horizontally */
+}
+
+.auth-form {
+    background-color: #333333; /* Slightly lighter gray for the form background */
+    padding: 2rem;
+    border-radius: 8px;
+    width: 50%; /* Adjust based on your preference */
+    max-width: 600px; /* Slightly wider than the login form if needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    display: flex;
+    flex-direction: column;
+}
+
+/* SignUp.css */
+.auth-form .form-control::placeholder { /* Targets placeholders within form controls */
+    color: #ccc; /* Light grey color; adjust as needed to fit your design */
+    opacity: 1; /* Ensure full visibility */
+}
+
+.auth-form .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #ccc;
+}
+
+.auth-form .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #ccc;
+}
+
+.auth-form .form-control {
+    background-color: #242424;
+    border: 1px solid #444444;
+    color: #ffffff;
+    margin-bottom: 1rem; /* Space between form fields */
+}
+
+.auth-form .form-control:focus {
+    background-color: #242424;
+    border-color: #556688;
+    color: #ffffff;
+}
+
+.auth-form .btn-primary {
+    font-size: 1.25rem;
+    padding: .75rem 1.25rem;
+    border-radius: .3rem;
+    align-self: end; /* Align the button to the form's end (right) */
+    width: auto; /* Let the button size according to its content */
+    background-color: #667799;
+    border-color: #556688;
+}
+
+
+
+.auth-form label {
+    color: #ffffff;
+}
