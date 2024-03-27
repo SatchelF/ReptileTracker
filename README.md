@@ -3,6 +3,7 @@ Create your own `.env` from [.env.example](.env.example).
 ```bash
 docker compose up -d
 ```
+
 ```bash
 yarn migrate-dev
 ```
