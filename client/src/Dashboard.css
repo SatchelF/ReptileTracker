@@ -1,0 +1,21 @@
+.dashboard-container {
+    background-color: #242424;
+    min-height: 100vh; 
+    color: #ffffff; 
+    border: 2px solid rebeccapurple;
+    position: relative; /* Needed for absolute positioning of children */
+}
+
+
+.add-btn {
+    position: absolute;
+    bottom: 100px;
+    left: 70%;
+}
+
+.logout-btn {
+    position: absolute;
+    left: 20px;
+    bottom: 100px;
+}
+

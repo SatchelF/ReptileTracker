@@ -1,0 +1,52 @@
+.card {
+    background-color: #2d2d2d; /* Slightly lighter than the dashboard for contrast */
+    border: 1px solid #663399; /* Rebecca purple border */
+    box-shadow: 0 4px 8px rgba(102, 51, 153, 0.4); /* Soft shadow with a purple hue */
+    color: #fff; /* White text for readability */
+}
+
+.card-title, .card-subtitle {
+    color: #ffffff; /* Ensures text is bright and readable */
+}
+
+.card .btn-primary {
+    background-color: #663399;
+    border-color: #663399; /* Style primary buttons with the theme color */
+}
+
+.card .btn-primary:hover {
+    background-color: #7a4d9b; /* A lighter purple on hover */
+    border-color: #7a4d9b;
+}
+
+.card .btn-danger {
+    background-color: #ff3860; /* A vibrant color for delete buttons */
+    border-color: #ff3860;
+}
+
+.card .btn-danger:hover {
+    background-color: #ff5e85; /* A lighter shade for hover state */
+    border-color: #ff5e85;
+}
+
+
+.reptile-card .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.reptile-card .date-info {
+    font-size: 0.8rem; /* Adjust size as needed */
+    align-self: start; /* Aligns to the top of the container */
+    margin-top: -10px; /* Adjust based on your card's padding to fit nicely */
+}
+
+.reptile-card .card-actions {
+    margin-top: auto; /* Pushes actions to the bottom */
+}
+
+.gray{
+    color: gray;
+}
+

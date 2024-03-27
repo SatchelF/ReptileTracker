@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../utils/use_api";
+import ReptileCard from "./components/ReptileCard/ReptileCard";
+import AddReptileModal from "./components/AddReptileModal/AddReptileModal";
+import './Dashboard.css'; 
+
 
 export const Dashboard = () => {
   const [schedules, setSchedules] = useState([]);
   const [reptiles, setReptiles] = useState([]);
-  const [isCreatingReptile, setIsCreatingReptile] = useState(false);
-  const [newReptileName, setNewReptileName] = useState("");
-  const [newReptileSex, setNewReptileSex] = useState("m"); // default to 'm'
-  const [newReptileSpecies, setNewReptileSpecies] = useState("ball_python"); // default to 'ball_python'
+  const [showModal, setShowModal] = useState(false); // State to control modal visibility
   const navigate = useNavigate();
   const api = useApi();
 
@@ -33,23 +34,17 @@ export const Dashboard = () => {
     navigate(`/reptiles/${reptileId}`);
   };
 
-  const handleCreateReptile = async () => {
+  const handleCreateReptile = async ({ name, sex, species }) => {
     const res = await api.post("/reptiles", {
-      name: newReptileName,
-      sex: newReptileSex,
-      species: newReptileSpecies,
+      name: name,
+      sex: sex,
+      species: species,
     });
-    // Reset the form fields and possibly fetch the updated list of reptiles here
-    setNewReptileName("");
-    setNewReptileSex("m"); // Reset to default or as per your logic
-    setNewReptileSpecies("ball_python"); // Reset to default or as per your logic
-    setIsCreatingReptile(false); // Close the form
 
-    if (res.reptile)
-    {
-        setReptiles((prev) => [...prev, res.reptile]);
+    if (res.reptile) {
+      setReptiles((prev) => [...prev, res.reptile]);
     }
-
+    setShowModal(false); // Close the modal
   };
 
   const handleDeleteReptile = async (reptileId) => {
@@ -70,64 +65,44 @@ export const Dashboard = () => {
   };
 
   return (
-    <>
-      <h2>Today's Schedules</h2>
-      <ul>
-        {schedules &&
-          schedules.map((schedule) => (
-            <li key={schedule.id}>
-              {schedule.description} - {schedule.type}
-            </li>
-          ))}
-      </ul>
-
-      <h2>My Reptiles</h2>
-      <ul>
-        {reptiles &&
-          reptiles.map((reptile) => (
-            <li key={reptile.id}>
-              {reptile.name} -{" "}
-              <button onClick={() => handleReptileSelect(reptile.id)}>
-                View
-              </button>
-              <button onClick={() => handleDeleteReptile(reptile.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-      </ul>
-      {isCreatingReptile ? (
-        <div>
-          <input
-            type="text"
-            placeholder="Reptile Name"
-            value={newReptileName}
-            onChange={(e) => setNewReptileName(e.target.value)}
-          />
-          <select
-            value={newReptileSex}
-            onChange={(e) => setNewReptileSex(e.target.value)}
-          >
-            <option value="m">Male</option>
-            <option value="f">Female</option>
-          </select>
-          <select
-            value={newReptileSpecies}
-            onChange={(e) => setNewReptileSpecies(e.target.value)}
-          >
-            <option value="ball_python">Ball Python</option>
-            <option value="king_snake">King Snake</option>
-            <option value="corn_snake">Corn Snake</option>
-            <option value="redtail_boa">Redtail Boa</option>
-          </select>
-          <button onClick={handleCreateReptile}>Create Reptile</button>
+    <div className="dashboard-container">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-9">
+          <ul>
+            {schedules &&
+              schedules.map((schedule) => (
+                <li key={schedule.id}>
+                  {schedule.description} - {schedule.type}
+                </li>
+              ))}
+          </ul>
+          <h2 className="mb-5">My Reptiles</h2>
+          <div className="row ">
+            {reptiles &&
+              reptiles.map((reptile) => (
+                <ReptileCard
+                  key={reptile.id}
+                  reptile={reptile}
+                  onSelect={handleReptileSelect}
+                  onDelete={handleDeleteReptile}
+                />
+              ))}
+          </div>
         </div>
-      ) : (
-        <button onClick={() => setIsCreatingReptile(true)}>
-          Add New Reptile
-        </button>
-      )}
-      <button onClick={logout}>Logout</button>
-    </>
+        <div className="col-md-3">
+          <h2>Schedule</h2>
+          {/* Render your schedule component here */}
+        </div>
+      </div>
+      <button className="btn btn-primary btn-floating add-btn" onClick={() => setShowModal(true)}>+</button>
+      <AddReptileModal 
+        show={showModal} 
+        onClose={() => setShowModal(false)} 
+        onCreateReptile={handleCreateReptile} 
+      />
+      <button className="btn btn-outline-danger logout-btn" onClick={logout}>Logout</button>
+    </div>
+    </div>
   );
 };
