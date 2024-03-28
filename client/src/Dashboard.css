@@ -2,7 +2,6 @@
     background-color: #242424;
     min-height: 100vh; 
     color: #ffffff; 
-    border: 2px solid rebeccapurple;
 }
 
 
@@ -31,7 +30,7 @@
 .schedule-list {
     flex-grow: 1;
     overflow-y: auto; 
-    height: 500px;
+    height: 100vh;
     padding-right: 5px; 
 }
 

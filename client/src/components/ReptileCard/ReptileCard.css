@@ -3,6 +3,7 @@
     border: 1px solid #663399; /* Rebecca purple border */
     box-shadow: 0 4px 8px rgba(102, 51, 153, 0.4); /* Soft shadow with a purple hue */
     color: #fff; /* White text for readability */
+    max-height: 300px;
 }
 
 .card-title, .card-subtitle {
