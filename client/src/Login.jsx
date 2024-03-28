@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useApi } from "../utils/use_api";
-import './login.css';
+import './Login.css';
 
 export const Login = () => {
   const passwordInputRef = useRef(null);
