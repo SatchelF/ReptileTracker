@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; // Corrected import to include useState
 import './AddReptileModal.css'; // Import your custom CSS here
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const AddReptileModal = ({ show, onClose, onCreateReptile }) => {
   const [newReptileName, setNewReptileName] = useState('');
@@ -26,60 +27,63 @@ const AddReptileModal = ({ show, onClose, onCreateReptile }) => {
   }
 
   return (
-    <div className="modal show" style={{ display: 'block' }} tabIndex="-1" role="dialog">
-      <div className="modal-dialog modal-dialog-centered modal-custom" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Add New Reptile</h5>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <div className="modal-body">
-              <div className="form-group">
-                <label htmlFor="reptileName">Reptile Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="reptileName"
-                  placeholder="Enter reptile's name"
-                  value={newReptileName}
-                  onChange={(e) => setNewReptileName(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="reptileSex">Sex</label>
-                <select
-                  className="form-control"
-                  id="reptileSex"
-                  value={newReptileSex}
-                  onChange={(e) => setNewReptileSex(e.target.value)}
-                >
-                  <option value="m">Male</option>
-                  <option value="f">Female</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label htmlFor="reptileSpecies">Species</label>
-                <select
-                  className="form-control"
-                  id="reptileSpecies"
-                  value={newReptileSpecies}
-                  onChange={(e) => setNewReptileSpecies(e.target.value)}
-                >
-                  <option value="ball_python">Ball Python</option>
-                  <option value="king_snake">King Snake</option>
-                  <option value="corn_snake">Corn Snake</option>
-                  <option value="redtail_boa">Redtail Boa</option>
-                </select>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
-              <button type="submit" className="btn btn-primary">Create Reptile</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Modal
+      show={show}
+      onHide={onClose}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Modal.Header closeButton>
+        <Modal.Title id="contained-modal-title-vcenter">
+          Add New Reptile
+        </Modal.Title>
+      </Modal.Header>
+      <Form onSubmit={handleSubmit}>
+        <Modal.Body>
+          <Form.Group>
+            <Form.Label htmlFor="reptileName">Reptile Name</Form.Label>
+            <Form.Control
+              type="text"
+              id="reptileName"
+              placeholder="Enter reptile's name"
+              value={newReptileName}
+              onChange={(e) => setNewReptileName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label htmlFor="reptileSex">Sex</Form.Label>
+            <Form.Control
+              as="select"
+              id="reptileSex"
+              value={newReptileSex}
+              onChange={(e) => setNewReptileSex(e.target.value)}
+            >
+              <option value="m">Male</option>
+              <option value="f">Female</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label htmlFor="reptileSpecies">Species</Form.Label>
+            <Form.Control
+              as="select"
+              id="reptileSpecies"
+              value={newReptileSpecies}
+              onChange={(e) => setNewReptileSpecies(e.target.value)}
+            >
+              <option value="ball_python">Ball Python</option>
+              <option value="king_snake">King Snake</option>
+              <option value="corn_snake">Corn Snake</option>
+              <option value="redtail_boa">Redtail Boa</option>
+            </Form.Control>
+          </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>Cancel</Button>
+          <Button variant="primary" type="submit">Create Reptile</Button>
+        </Modal.Footer>
+      </Form>
+    </Modal>
   );
 };
 
