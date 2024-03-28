@@ -19,7 +19,8 @@ export const Login = () => {
       });
       if (res.token) {
         window.localStorage.setItem("jwt", res.token);
-        navigate("/");
+        api.refreshToken();
+        navigate("/dashboard");
       } else {
         const errorMessage = "Login failed. Please check your credentials and try again.";
         if (passwordInputRef.current) {

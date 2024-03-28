@@ -57,13 +57,6 @@ export const Dashboard = () => {
     // api.get("/reptiles").then(setReptiles);
   };
 
-  const logout = () => {
-    window.localStorage.removeItem("jwt");
-    api.refreshToken();
-    setReptiles([]);
-    navigate("/login");
-  };
-
   return (
     <div className="dashboard-container">
     <div className="container-fluid">
@@ -107,7 +100,6 @@ export const Dashboard = () => {
             onClose={() => setShowModal(false)} 
             onCreateReptile={handleCreateReptile} 
           />
-        <button className="btn btn-outline-danger logout-btn btn-lg" onClick={logout}>Logout</button>
     </div>
     </div>
   );
