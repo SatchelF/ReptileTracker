@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useApi } from "../utils/use_api";
 import { useParams } from "react-router-dom";
 import { EditReptileModal } from "./components/EditReptileModal/EditReptileModal";
+import {AddFeedingModal} from "./components/AddFeedingModal/AddFeedingModal";
 import './Reptile.css';
 
 
@@ -14,8 +15,8 @@ export const Reptile = () => {
 
   const [feedings, setFeedings] = useState([]);
   const [isCreatingFeeding, setIsCreatingFeeding] = useState(false);
-  const [newFeedingFoodItem, setNewFeedingFoodItem] = useState("");
-  const [newFeedingDate, setNewFeedingDate] = useState("");
+  // const [newFeedingFoodItem, setNewFeedingFoodItem] = useState("");
+  // const [newFeedingDate, setNewFeedingDate] = useState("");
 
   const [husbandryRecords, setHusbandryRecords] = useState([]);
   const [isCreatingHusbandryRecord, setIsCreatingHusbandryRecord] =
@@ -63,27 +64,27 @@ export const Reptile = () => {
   }, [api, reptileId]);
 
   // Handlers for creating new records
-  const handleCreateFeeding = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+  // const handleCreateFeeding = async (e) => {
+  //   e.preventDefault(); // Prevent default form submission behavior
 
-    try {
-      const feedingInfo = {
-        reptileId: reptileId, // Ensure this is passed correctly to your API
-        foodItem: newFeedingFoodItem,
-        date: newFeedingDate,
-      };
-      const res = await api.post(`/feedings`, feedingInfo);
-      setIsCreatingFeeding(false); // Close the form
-      setNewFeedingFoodItem(""); // Reset the form fields
-      setNewFeedingDate("");
-      // Optionally, fetch the updated list of feedings here to reflect the new addition
-      if (res.feeding) {
-        setFeedings((prev) => [...prev, res.feeding]);
-      }
-    } catch (error) {
-      console.error("Failed to create new feeding:", error);
-    }
-  };
+  //   try {
+  //     const feedingInfo = {
+  //       reptileId: reptileId, // Ensure this is passed correctly to your API
+  //       foodItem: newFeedingFoodItem,
+  //       date: newFeedingDate,
+  //     };
+  //     const res = await api.post(`/feedings`, feedingInfo);
+  //     setIsCreatingFeeding(false); // Close the form
+  //     setNewFeedingFoodItem(""); // Reset the form fields
+  //     setNewFeedingDate("");
+  //     // Optionally, fetch the updated list of feedings here to reflect the new addition
+  //     if (res.feeding) {
+  //       setFeedings((prev) => [...prev, res.feeding]);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to create new feeding:", error);
+  //   }
+  // };
 
   const handleCreateHusbandryRecord = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -172,40 +173,10 @@ export const Reptile = () => {
 </div>
     <div className="col-md-3">
       <h2>Feedings</h2>
-      {isCreatingFeeding ? (
-  <form onSubmit={handleCreateFeeding} className="mt-3">
-    <div className="mb-3">
-      <label htmlFor="foodItem" className="form-label">Food Item:</label>
-      <input
-        id="foodItem"
-        type="text"
-        className="form-control"
-        value={newFeedingFoodItem}
-        onChange={(e) => setNewFeedingFoodItem(e.target.value)}
-      />
-    </div>
-    <div className="mb-3">
-      <label htmlFor="feedingDate" className="form-label">Feeding Date:</label>
-      <input
-        id="feedingDate"
-        type="date"
-        className="form-control"
-        value={newFeedingDate}
-        onChange={(e) => setNewFeedingDate(e.target.value)}
-      />
-    </div>
-    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-      <button type="submit" className="btn btn-primary me-2">Submit</button>
-      <button type="button" className="btn btn-secondary" onClick={() => setIsCreatingFeeding(false)}>
-        Cancel
-      </button>
-    </div>
-  </form>
-      ) : (
+        <AddFeedingModal show={isCreatingFeeding} onHide={() => setIsCreatingFeeding(false)}  setFeedings={setFeedings}/>
         <button onClick={() => setIsCreatingFeeding(true)} className="btn btn-primary">
           Add New Feeding
         </button>
-      )}
 
       <ul>
         {feedings &&
