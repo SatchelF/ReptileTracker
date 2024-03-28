@@ -1,5 +1,4 @@
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useApi } from "../utils/use_api";
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 

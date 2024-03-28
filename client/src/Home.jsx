@@ -29,7 +29,7 @@ export const Home = () => {
   return (
     <>
       <div className="home-container">
-        {token && (
+        {!token && (
           <>
             <h1>Welcome!</h1>
             <p>Description of what the app does</p>
