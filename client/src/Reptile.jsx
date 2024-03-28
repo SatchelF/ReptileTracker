@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../utils/use_api";
 import { useParams } from "react-router-dom";
+import { EditReptileModal } from "./components/EditReptileModal/EditReptileModal";
 import './Reptile.css';
 
 
@@ -9,10 +10,7 @@ export const Reptile = () => {
   const api = useApi();
 
   const [reptile, setReptile] = useState(null);
-  const [isUpdatingReptile, setIsUpdatingReptile] = useState(false);
-  const [updateReptileName, setUpdateReptileName] = useState("");
-  const [updateReptileSpecies, setUpdateReptileSpecies] = useState("");
-  const [updateReptileSex, setUpdateReptileSex] = useState("");
+  const [isUpdatingReptile, setIsUpdatingReptile] = useState(false);;
 
   const [feedings, setFeedings] = useState([]);
   const [isCreatingFeeding, setIsCreatingFeeding] = useState(false);
@@ -47,12 +45,6 @@ export const Reptile = () => {
       try {
         const reptileData = await api.get(`/reptiles/${reptileId}`);
         setReptile(reptileData.reptile);
-
-        if (reptileData.reptile) {
-          setUpdateReptileName(reptileData.reptile.name);
-          setUpdateReptileSpecies(reptileData.reptile.species);
-          setUpdateReptileSex(reptileData.reptile.sex);
-        }
 
         const feedingData = await api.get(`/feedings/${reptileId}`);
         setFeedings(feedingData.feedings);
@@ -151,28 +143,6 @@ export const Reptile = () => {
     }
   };
 
-  // Handler for updating the reptile
-  const handleUpdateReptile = async (e) => {
-    e.preventDefault();
-    try {
-      const updatedReptile = {
-        name: updateReptileName,
-        species: updateReptileSpecies,
-        sex: updateReptileSex,
-      };
-      const res = await api.put(`/reptiles/${reptileId}`, updatedReptile);
-      setIsUpdatingReptile(false);
-      if (res.reptile) {
-        setReptile(res.reptile);
-      }
-    } catch (error) {
-      console.error("Failed to update reptile:", error);
-    }
-  };
-
-  // Example of how to use createFeeding, createHusbandryRecord, createSchedule, and updateReptile omitted for brevity
-  // You'd typically have form inputs for creating these records and updating the reptile, which would call these functions
-
   return (
     <>
     <div className="reptile-container">
@@ -198,51 +168,7 @@ export const Reptile = () => {
   )}
 
   {/* Update Reptile Details Form */}
-  {isUpdatingReptile && (
-    <form onSubmit={handleUpdateReptile} className="mt-3">
-      <h3>Update Reptile Details</h3>
-      <div className="mb-3">
-        <label htmlFor="updateName" className="form-label">Name:</label>
-        <input
-          id="updateName"
-          type="text"
-          className="form-control"
-          value={updateReptileName}
-          onChange={(e) => setUpdateReptileName(e.target.value)}
-        />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="updateSpecies" className="form-label">Species:</label>
-        <select
-          id="updateSpecies"
-          className="form-select"
-          value={updateReptileSpecies}
-          onChange={(e) => setUpdateReptileSpecies(e.target.value)}
-        >
-          <option value="ball_python">Ball Python</option>
-          <option value="king_snake">King Snake</option>
-          <option value="corn_snake">Corn Snake</option>
-          <option value="redtail_boa">Redtail Boa</option>
-        </select>
-      </div>
-      <div className="mb-3">
-        <label htmlFor="updateSex" className="form-label">Sex:</label>
-        <select
-          id="updateSex"
-          className="form-select"
-          value={updateReptileSex}
-          onChange={(e) => setUpdateReptileSex(e.target.value)}
-        >
-          <option value="m">Male</option>
-          <option value="f">Female</option>
-        </select>
-      </div>
-      <button type="submit" className="btn btn-primary me-2">Update Reptile</button>
-      <button type="button" className="btn btn-secondary" onClick={() => setIsUpdatingReptile(false)}>
-        Cancel
-      </button>
-    </form>
-  )}
+  <EditReptileModal show={isUpdatingReptile} onHide={() => setIsUpdatingReptile(false)} reptile={reptile} setReptile={setReptile}/>
 </div>
     <div className="col-md-3">
       <h2>Feedings</h2>
