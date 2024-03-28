@@ -31,8 +31,17 @@ export const Home = () => {
       <div className="home-container">
         {!token && (
           <>
-            <h1>Welcome!</h1>
-            <p>Description of what the app does</p>
+            <div class="container my-5">
+            <div class="row justify-content-center">
+              <div class="col-md-8">
+                <div class="text-center p-4 border shadow rounded bg-dark">
+                  <h1 class="display-4 fw-bold">Welcome to Reptile Tracker!</h1>
+                  <p class="lead">The modern solution for herpetoculturists. Effortlessly manage, track, and optimize the care of your reptiles with our digital platform, designed to replace outdated pen-and-paper methods. Start enhancing your reptile care experience today!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
           </>
         )}
       </div>

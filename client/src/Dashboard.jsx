@@ -82,9 +82,9 @@ export const Dashboard = () => {
             schedules.map((schedule) => (
               <div key={schedule.id} className="card mb-3">
                 <div className="card-body">
-                <h5 className="card-title">{schedule.reptile.name}</h5>
-                  <h5 className="card-title">{schedule.type}</h5>
-                  <p className="card-text">{schedule.description}</p>
+                <h5 className="card-title">Name: {schedule.reptile.name}</h5>
+                  <h5 className="card-title">Type: {schedule.type}</h5>
+                  <p className="card-text">Description: {schedule.description}</p>
                   {/* Include additional schedule details here */}
                 </div>
               </div>
@@ -95,7 +95,12 @@ export const Dashboard = () => {
         </div>
       </div>
       </div>
-        <button className="btn btn-primary btn-floating add-btn btn-lg" onClick={() => setShowModal(true)}>+</button>
+          <button
+            className="btn btn-primary btn-floating add-btn btn-lg"
+            onClick={() => setShowModal(true)}
+            data-bs-toggle="tooltip"
+            title="Create Reptile"> + 
+          </button>
           <AddReptileModal 
             show={showModal} 
             onClose={() => setShowModal(false)} 
