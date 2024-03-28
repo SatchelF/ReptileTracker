@@ -33,7 +33,7 @@ function App() {
               ) : (
                 <>
                   <Nav.Link as={Link} to="/login">Login</Nav.Link>
-                  <Nav.Link as={Link} to="/signup">Signup</Nav.Link>
+                  <Nav.Link as={Link} to="/sign_up">Signup</Nav.Link>
                 </>
               )}
             </Nav>
