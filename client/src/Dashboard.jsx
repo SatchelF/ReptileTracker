@@ -69,14 +69,6 @@ export const Dashboard = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-9">
-          <ul>
-            {schedules &&
-              schedules.map((schedule) => (
-                <li key={schedule.id}>
-                  {schedule.description} - {schedule.type}
-                </li>
-              ))}
-          </ul>
           <h2 className="mb-5">My Reptiles</h2>
           <div className="row ">
             {reptiles &&
@@ -90,18 +82,32 @@ export const Dashboard = () => {
               ))}
           </div>
         </div>
-        <div className="col-md-3">
-          <h2>Schedule</h2>
-          {/* Render your schedule component here */}
+        <div className="col-md-3 border h-100">
+        <h2>Schedule</h2>
+        <div className="schedule-list">
+          {schedules.length > 0 ? (
+            schedules.map((schedule) => (
+              <div key={schedule.id} className="card mb-3">
+                <div className="card-body">
+                  <h5 className="card-title">{schedule.type}</h5>
+                  <p className="card-text">{schedule.description}</p>
+                  {/* Include additional schedule details here */}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>No schedules for today.</p>
+          )}
         </div>
       </div>
-      <button className="btn btn-primary btn-floating add-btn" onClick={() => setShowModal(true)}>+</button>
-      <AddReptileModal 
-        show={showModal} 
-        onClose={() => setShowModal(false)} 
-        onCreateReptile={handleCreateReptile} 
-      />
-      <button className="btn btn-outline-danger logout-btn" onClick={logout}>Logout</button>
+      </div>
+        <button className="btn btn-primary btn-floating add-btn btn-lg" onClick={() => setShowModal(true)}>+</button>
+          <AddReptileModal 
+            show={showModal} 
+            onClose={() => setShowModal(false)} 
+            onCreateReptile={handleCreateReptile} 
+          />
+        <button className="btn btn-outline-danger logout-btn btn-lg" onClick={logout}>Logout</button>
     </div>
     </div>
   );

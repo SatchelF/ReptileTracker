@@ -1,0 +1,63 @@
+/* Assuming the same styling basis as login.css for consistency */
+.reptile-container {
+    background-color: #242424; /* Consistent background */
+    color: #ffffff; /* Text color */
+    padding: 2rem;
+    width: auto; /* Adjust based on context */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.reptile-container .form-control {
+    background-color: #242424;
+    color: #ffffff;
+}
+
+.reptile-container .form-control:focus {
+    border-color: #556688;
+}
+
+.reptile-container .btn-primary {
+    background-color: #556688;
+    border-color: #445566;
+    align-self: end;
+}
+
+.reptile-container .btn-primary:hover {
+    background-color: #667799;
+    border-color: #556688;
+}
+
+.reptile-container .form-control::placeholder {
+    color: #ccc;
+}
+
+.reptile-container label {
+    color: #ffffff;
+}
+
+.reptile-container .form-check-input {
+    background-color: #242424;
+    border-color: #444444;
+}
+
+.reptile-container .form-check-input:checked {
+    background-color: #556688;
+}
+
+.reptile-container .form-check-label {
+    color: #ffffff;
+}
+
+.reptile-container .btn-secondary {
+    background-color: #444444;
+    border-color: #333333;
+    color: #ffffff;
+}
+
+.reptile-container .btn-secondary:hover {
+    background-color: #555555;
+    border-color: #444444;
+}

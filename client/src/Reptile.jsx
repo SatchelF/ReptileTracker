@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../utils/use_api";
 import { useParams } from "react-router-dom";
+import './Reptile.css';
+
 
 export const Reptile = () => {
   const { reptileId } = useParams(); // Assuming you're using react-router and reptileId is in the URL
@@ -173,93 +175,108 @@ export const Reptile = () => {
 
   return (
     <>
-      <h1>Reptile Details</h1>
-      {/* Display reptile details */}
-      {reptile && (
-        <div>
-          <p>Name: {reptile.name}</p>
-          <p>Sex: {reptile.sex}</p>
-          <p>Species: {reptile.species}</p>
-          {/* Add more reptile details as needed */}
-        </div>
-      )}
+    <div className="reptile-container">
+    <div className="container">
+    <div className="row">
+    <div className="col-md-3">
+  <h1>Reptile Details</h1>
+  {/* Edit Reptile Details Button */}
+  {!isUpdatingReptile && (
+    <button onClick={() => setIsUpdatingReptile(true)} className="btn btn-primary mb-3">
+      Edit Reptile Details
+    </button>
+  )}
 
-      {isUpdatingReptile ? (
-        <form onSubmit={handleUpdateReptile}>
-          <h3>Update Reptile Details</h3>
-          <div>
-            <label htmlFor="updateName">Name:</label>
-            <input
-              id="updateName"
-              type="text"
-              value={updateReptileName}
-              onChange={(e) => setUpdateReptileName(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="updateSpecies">Species:</label>
-            <select
-              id="updateSpecies"
-              value={updateReptileSpecies}
-              onChange={(e) => setUpdateReptileSpecies(e.target.value)}
-            >
-              {/* Assuming ReptileSpecies enum values are 'ball_python', 'king_snake', 'corn_snake', 'redtail_boa' */}
-              <option value="ball_python">Ball Python</option>
-              <option value="king_snake">King Snake</option>
-              <option value="corn_snake">Corn Snake</option>
-              <option value="redtail_boa">Redtail Boa</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="updateSex">Sex:</label>
-            <select
-              id="updateSex"
-              value={updateReptileSex}
-              onChange={(e) => setUpdateReptileSex(e.target.value)}
-            >
-              <option value="m">Male</option>
-              <option value="f">Female</option>
-            </select>
-          </div>
-          <button type="submit">Update Reptile</button>
-          <button type="button" onClick={() => setIsUpdatingReptile(false)}>
-            Cancel
-          </button>
-        </form>
-      ) : (
-        <button onClick={() => setIsUpdatingReptile(true)}>
-          Edit Reptile Details
-        </button>
-      )}
+  {/* Display reptile details */}
+  {reptile && (
+    <div>
+      <p>Name: {reptile.name}</p>
+      <p>Sex: {reptile.sex}</p>
+      <p>Species: {reptile.species}</p>
+      {/* Add more reptile details as needed */}
+    </div>
+  )}
 
+  {/* Update Reptile Details Form */}
+  {isUpdatingReptile && (
+    <form onSubmit={handleUpdateReptile} className="mt-3">
+      <h3>Update Reptile Details</h3>
+      <div className="mb-3">
+        <label htmlFor="updateName" className="form-label">Name:</label>
+        <input
+          id="updateName"
+          type="text"
+          className="form-control"
+          value={updateReptileName}
+          onChange={(e) => setUpdateReptileName(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="updateSpecies" className="form-label">Species:</label>
+        <select
+          id="updateSpecies"
+          className="form-select"
+          value={updateReptileSpecies}
+          onChange={(e) => setUpdateReptileSpecies(e.target.value)}
+        >
+          <option value="ball_python">Ball Python</option>
+          <option value="king_snake">King Snake</option>
+          <option value="corn_snake">Corn Snake</option>
+          <option value="redtail_boa">Redtail Boa</option>
+        </select>
+      </div>
+      <div className="mb-3">
+        <label htmlFor="updateSex" className="form-label">Sex:</label>
+        <select
+          id="updateSex"
+          className="form-select"
+          value={updateReptileSex}
+          onChange={(e) => setUpdateReptileSex(e.target.value)}
+        >
+          <option value="m">Male</option>
+          <option value="f">Female</option>
+        </select>
+      </div>
+      <button type="submit" className="btn btn-primary me-2">Update Reptile</button>
+      <button type="button" className="btn btn-secondary" onClick={() => setIsUpdatingReptile(false)}>
+        Cancel
+      </button>
+    </form>
+  )}
+</div>
+    <div className="col-md-3">
       <h2>Feedings</h2>
       {isCreatingFeeding ? (
-        <form onSubmit={handleCreateFeeding}>
-          <div>
-            <label htmlFor="foodItem">Food Item:</label>
-            <input
-              id="foodItem"
-              type="text"
-              value={newFeedingFoodItem}
-              onChange={(e) => setNewFeedingFoodItem(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="feedingDate">Feeding Date:</label>
-            <input
-              id="feedingDate"
-              type="date"
-              value={newFeedingDate}
-              onChange={(e) => setNewFeedingDate(e.target.value)}
-            />
-          </div>
-          <button type="submit">Submit</button>
-          <button type="button" onClick={() => setIsCreatingFeeding(false)}>
-            Cancel
-          </button>
-        </form>
+  <form onSubmit={handleCreateFeeding} className="mt-3">
+    <div className="mb-3">
+      <label htmlFor="foodItem" className="form-label">Food Item:</label>
+      <input
+        id="foodItem"
+        type="text"
+        className="form-control"
+        value={newFeedingFoodItem}
+        onChange={(e) => setNewFeedingFoodItem(e.target.value)}
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="feedingDate" className="form-label">Feeding Date:</label>
+      <input
+        id="feedingDate"
+        type="date"
+        className="form-control"
+        value={newFeedingDate}
+        onChange={(e) => setNewFeedingDate(e.target.value)}
+      />
+    </div>
+    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button type="submit" className="btn btn-primary me-2">Submit</button>
+      <button type="button" className="btn btn-secondary" onClick={() => setIsCreatingFeeding(false)}>
+        Cancel
+      </button>
+    </div>
+  </form>
       ) : (
-        <button onClick={() => setIsCreatingFeeding(true)}>
+        <button onClick={() => setIsCreatingFeeding(true)} className="btn btn-primary">
           Add New Feeding
         </button>
       )}
@@ -272,61 +289,65 @@ export const Reptile = () => {
             </li>
           ))}
       </ul>
-
+    </div>
+    <div className="col-md-3">
       <h2>Husbandry Records</h2>
       {isCreatingHusbandryRecord ? (
-        <form onSubmit={handleCreateHusbandryRecord}>
-          <h3>Create New Husbandry Record</h3>
-          <div>
-            <label htmlFor="length">Length:</label>
-            <input
-              id="length"
-              type="number"
-              step="0.01"
-              value={newLength}
-              onChange={(e) => setNewLength(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="weight">Weight:</label>
-            <input
-              id="weight"
-              type="number"
-              step="0.01"
-              value={newWeight}
-              onChange={(e) => setNewWeight(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="temperature">Temperature:</label>
-            <input
-              id="temperature"
-              type="number"
-              step="0.01"
-              value={newTemperature}
-              onChange={(e) => setNewTemperature(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="humidity">Humidity:</label>
-            <input
-              id="humidity"
-              type="number"
-              step="0.01"
-              value={newHumidity}
-              onChange={(e) => setNewHumidity(e.target.value)}
-            />
-          </div>
-          <button type="submit">Add Record</button>
-          <button
-            type="button"
-            onClick={() => setIsCreatingHusbandryRecord(false)}
-          >
-            Cancel
-          </button>
-        </form>
+  <form onSubmit={handleCreateHusbandryRecord} className="mt-3">
+    <h3>Create New Husbandry Record</h3>
+    <div className="mb-3">
+      <label htmlFor="length" className="form-label">Length:</label>
+      <input
+        id="length"
+        type="number"
+        className="form-control"
+        step="0.01"
+        value={newLength}
+        onChange={(e) => setNewLength(e.target.value)}
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="weight" className="form-label">Weight:</label>
+      <input
+        id="weight"
+        type="number"
+        className="form-control"
+        step="0.01"
+        value={newWeight}
+        onChange={(e) => setNewWeight(e.target.value)}
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="temperature" className="form-label">Temperature:</label>
+      <input
+        id="temperature"
+        type="number"
+        className="form-control"
+        step="0.01"
+        value={newTemperature}
+        onChange={(e) => setNewTemperature(e.target.value)}
+      />
+    </div>
+    <div className="mb-3">
+      <label htmlFor="humidity" className="form-label">Humidity:</label>
+      <input
+        id="humidity"
+        type="number"
+        className="form-control"
+        step="0.01"
+        value={newHumidity}
+        onChange={(e) => setNewHumidity(e.target.value)}
+      />
+    </div>
+    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button type="submit" className="btn btn-primary me-2">Add Record</button>
+      <button type="button" className="btn btn-secondary" onClick={() => setIsCreatingHusbandryRecord(false)} >
+        Cancel
+      </button>
+    </div>
+  </form>
       ) : (
-        <button onClick={() => setIsCreatingHusbandryRecord(true)}>
+        <button onClick={() => setIsCreatingHusbandryRecord(true)} className="btn btn-primary">
           Add New Husbandry Record
         </button>
       )}
@@ -339,55 +360,61 @@ export const Reptile = () => {
             </li>
           ))}
       </ul>
-
+    </div>
+    <div className="col-md-3">
       <h2>Schedules</h2>
       {isCreatingSchedule ? (
-        <form onSubmit={handleCreateSchedule}>
-          <h3>Create New Schedule</h3>
-          {/* Form fields for schedule type, description, days, etc. */}
-          <div>
-            <label htmlFor="scheduleType">Type:</label>
-            <select
-              id="scheduleType"
-              value={newScheduleType}
-              onChange={(e) => setNewScheduleType(e.target.value)}
-            >
-              <option value="feed">Feed</option>
-              <option value="record">Record</option>
-              <option value="clean">Clean</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="description">Description:</label>
-            <input
-              id="description"
-              type="text"
-              value={newDescription}
-              onChange={(e) => setNewDescription(e.target.value)}
-            />
-          </div>
-          {/* Checkbox inputs for days */}
-          <div>
-            {Object.keys(days).map((day) => (
-              <div key={day}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={days[day]}
-                    onChange={() => setDays({ ...days, [day]: !days[day] })}
-                  />
-                  {day.charAt(0).toUpperCase() + day.slice(1)}
-                </label>
-              </div>
-            ))}
-          </div>
-          <button type="submit">Add Schedule</button>
-          <button type="button" onClick={() => setIsCreatingSchedule(false)}>
-            Cancel
-          </button>
-        </form>
+  <form onSubmit={handleCreateSchedule} className="mt-3">
+    <h3>Create New Schedule</h3>
+    <div className="mb-3">
+      <label htmlFor="scheduleType" className="form-label">Type:</label>
+      <select
+        id="scheduleType"
+        className="form-select"
+        value={newScheduleType}
+        onChange={(e) => setNewScheduleType(e.target.value)}
+      >
+        <option value="feed">Feed</option>
+        <option value="record">Record</option>
+        <option value="clean">Clean</option>
+      </select>
+    </div>
+    <div className="mb-3">
+      <label htmlFor="description" className="form-label">Description:</label>
+      <input
+        id="description"
+        type="text"
+        className="form-control"
+        value={newDescription}
+        onChange={(e) => setNewDescription(e.target.value)}
+      />
+    </div>
+    <fieldset className="mb-3">
+      <legend className="form-label">Days:</legend>
+      {Object.keys(days).map((day) => (
+        <div key={day} className="form-check">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id={`day-${day}`}
+            checked={days[day]}
+            onChange={() => setDays({ ...days, [day]: !days[day] })}
+          />
+          <label htmlFor={`day-${day}`} className="form-check-label">
+            {day.charAt(0).toUpperCase() + day.slice(1)}
+          </label>
+        </div>
+      ))}
+    </fieldset>
+    <div className="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button type="submit" className="btn btn-primary me-2">Add Schedule</button>
+      <button type="button" className="btn btn-secondary" onClick={() => setIsCreatingSchedule(false)}>
+        Cancel
+      </button>
+    </div>
+  </form>
       ) : (
-        <button onClick={() => setIsCreatingSchedule(true)}>
+        <button onClick={() => setIsCreatingSchedule(true)} className="btn btn-primary">
           Add New Schedule
         </button>
       )}
@@ -420,6 +447,10 @@ export const Reptile = () => {
             );
           })}
       </ul>
+      </div>
+    </div>
+    </div>
+    </div>
     </>
   );
 };

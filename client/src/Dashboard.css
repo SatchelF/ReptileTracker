@@ -3,14 +3,16 @@
     min-height: 100vh; 
     color: #ffffff; 
     border: 2px solid rebeccapurple;
-    position: relative; /* Needed for absolute positioning of children */
 }
+
 
 
 .add-btn {
     position: absolute;
     bottom: 100px;
     left: 70%;
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
 }
 
 .logout-btn {
@@ -19,3 +21,37 @@
     bottom: 100px;
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap; /* Allows flex items to wrap if needed */
+  }
+  
+
+
+.schedule-list {
+    flex-grow: 1;
+    overflow-y: auto; 
+    height: 500px;
+    padding-right: 5px; 
+}
+
+.dashboard-container .container-fluid, .dashboard-container .row {
+    height: 100%;
+}
+
+.schedule-list {
+    flex-grow: 1;
+}
+
+.add-btn, .logout-btn {
+    position: fixed;
+    bottom: 100px;
+}
+
+.add-btn {
+    left: 70%;
+}
+
+.logout-btn {
+    left: 20px;
+}
