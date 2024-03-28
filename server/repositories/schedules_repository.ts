@@ -100,6 +100,9 @@ export class SchedulesRepository {
 
     return this.db.schedule.findMany({
       where: whereClauseForToday,
+      include: {
+        reptile: true,
+      },
     });
   }
 }

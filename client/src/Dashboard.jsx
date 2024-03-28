@@ -82,6 +82,7 @@ export const Dashboard = () => {
             schedules.map((schedule) => (
               <div key={schedule.id} className="card mb-3">
                 <div className="card-body">
+                <h5 className="card-title">{schedule.reptile.name}</h5>
                   <h5 className="card-title">{schedule.type}</h5>
                   <p className="card-text">{schedule.description}</p>
                   {/* Include additional schedule details here */}
