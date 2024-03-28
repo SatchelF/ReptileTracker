@@ -39,6 +39,9 @@ export class HusbandryRecordsRepository {
       where: {
         reptileId,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }
 }

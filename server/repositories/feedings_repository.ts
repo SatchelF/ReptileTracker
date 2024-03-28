@@ -30,6 +30,9 @@ export class FeedingsRepository {
       where: {
         reptileId,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }
 }
