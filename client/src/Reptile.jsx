@@ -5,6 +5,7 @@ import { EditReptileModal } from "./components/EditReptileModal/EditReptileModal
 import { AddFeedingModal } from "./components/AddFeedingModal/AddFeedingModal";
 import "./Reptile.css";
 import { AddHusbandryRecordModal } from "./components/AddHusbandryRecordModal/AddHusbandryRecordModal";
+import AddScheduleModal from "./components/AddScheduleModal/AddScheduleModal";
 
 export const Reptile = () => {
   const { reptileId } = useParams(); // Assuming you're using react-router and reptileId is in the URL
@@ -24,19 +25,19 @@ export const Reptile = () => {
   // const [newTemperature, setNewTemperature] = useState(0);
   // const [newHumidity, setNewHumidity] = useState(0);
 
-  const [isCreatingSchedule, setIsCreatingSchedule] = useState(false);
   const [schedules, setSchedules] = useState([]);
-  const [newScheduleType, setNewScheduleType] = useState("feed");
-  const [newDescription, setNewDescription] = useState("");
-  const [days, setDays] = useState({
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  });
+  const [isCreatingSchedule, setIsCreatingSchedule] = useState(false);
+  // const [newScheduleType, setNewScheduleType] = useState("feed");
+  // const [newDescription, setNewDescription] = useState("");
+  // const [days, setDays] = useState({
+  //   monday: false,
+  //   tuesday: false,
+  //   wednesday: false,
+  //   thursday: false,
+  //   friday: false,
+  //   saturday: false,
+  //   sunday: false,
+  // });
 
   // Fetch reptile details and related data
   useEffect(() => {
@@ -61,63 +62,37 @@ export const Reptile = () => {
     fetchData();
   }, [api, reptileId]);
 
-  // const handleCreateHusbandryRecord = async (e) => {
-  //   e.preventDefault(); // Prevent default form submission behavior
+  // const handleCreateSchedule = async (e) => {
+  //   e.preventDefault();
 
   //   try {
-  //     const husbandryRecordInfo = {
-  //       reptileId: reptileId,
-  //       length: parseFloat(newLength),
-  //       weight: parseFloat(newWeight),
-  //       temperature: parseFloat(newTemperature),
-  //       humidity: parseFloat(newHumidity),
+  //     const scheduleData = {
+  //       reptileId: parseInt(reptileId, 10), // Assuming reptileId comes from useParams and is a string
+  //       type: newScheduleType,
+  //       description: newDescription,
+  //       ...days,
   //     };
-  //     const res = await api.post(`/husbandry-records`, husbandryRecordInfo);
-  //     setIsCreatingHusbandryRecord(false); // Close the form
-  //     setNewLength(0); // Reset the form fields
-  //     setNewWeight(0);
-  //     setNewTemperature(0);
-  //     setNewHumidity(0);
-  //     // Optionally, fetch the updated list of feedings here to reflect the new addition
-  //     if (res.husbandryRecord) {
-  //       setHusbandryRecords((prev) => [...prev, res.husbandryRecord]);
+  //     const res = await api.post(`/schedules`, scheduleData);
+  //     // Reset form state
+  //     setIsCreatingSchedule(false);
+  //     setNewScheduleType("feed");
+  //     setNewDescription("");
+  //     setDays({
+  //       monday: false,
+  //       tuesday: false,
+  //       wednesday: false,
+  //       thursday: false,
+  //       friday: false,
+  //       saturday: false,
+  //       sunday: false,
+  //     });
+  //     if (res.schedule) {
+  //       setSchedules((prev) => [...prev, res.schedule]);
   //     }
   //   } catch (error) {
-  //     console.error("Failed to create new feeding:", error);
+  //     console.error("Failed to create new schedule:", error);
   //   }
   // };
-
-  const handleCreateSchedule = async (e) => {
-    e.preventDefault();
-
-    try {
-      const scheduleData = {
-        reptileId: parseInt(reptileId, 10), // Assuming reptileId comes from useParams and is a string
-        type: newScheduleType,
-        description: newDescription,
-        ...days,
-      };
-      const res = await api.post(`/schedules`, scheduleData);
-      // Reset form state
-      setIsCreatingSchedule(false);
-      setNewScheduleType("feed");
-      setNewDescription("");
-      setDays({
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false,
-      });
-      if (res.schedule) {
-        setSchedules((prev) => [...prev, res.schedule]);
-      }
-    } catch (error) {
-      console.error("Failed to create new schedule:", error);
-    }
-  };
 
   return (
     <>
@@ -195,79 +170,13 @@ export const Reptile = () => {
             </div>
             <div className="col-md-3">
               <h2>Schedules</h2>
-              {isCreatingSchedule ? (
-                <form onSubmit={handleCreateSchedule} className="mt-3">
-                  <h3>Create New Schedule</h3>
-                  <div className="mb-3">
-                    <label htmlFor="scheduleType" className="form-label">
-                      Type:
-                    </label>
-                    <select
-                      id="scheduleType"
-                      className="form-select"
-                      value={newScheduleType}
-                      onChange={(e) => setNewScheduleType(e.target.value)}
-                    >
-                      <option value="feed">Feed</option>
-                      <option value="record">Record</option>
-                      <option value="clean">Clean</option>
-                    </select>
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="description" className="form-label">
-                      Description:
-                    </label>
-                    <input
-                      id="description"
-                      type="text"
-                      className="form-control"
-                      value={newDescription}
-                      onChange={(e) => setNewDescription(e.target.value)}
-                    />
-                  </div>
-                  <fieldset className="mb-3">
-                    <legend className="form-label">Days:</legend>
-                    {Object.keys(days).map((day) => (
-                      <div key={day} className="form-check">
-                        <input
-                          type="checkbox"
-                          className="form-check-input"
-                          id={`day-${day}`}
-                          checked={days[day]}
-                          onChange={() =>
-                            setDays({ ...days, [day]: !days[day] })
-                          }
-                        />
-                        <label
-                          htmlFor={`day-${day}`}
-                          className="form-check-label"
-                        >
-                          {day.charAt(0).toUpperCase() + day.slice(1)}
-                        </label>
-                      </div>
-                    ))}
-                  </fieldset>
-                  <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="submit" className="btn btn-primary me-2">
-                      Add Schedule
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setIsCreatingSchedule(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
+              <AddScheduleModal show={isCreatingSchedule} onHide={() => setIsCreatingSchedule(false)} setSchedules={setSchedules} />
                 <button
                   onClick={() => setIsCreatingSchedule(true)}
                   className="btn btn-primary"
                 >
                   Add New Schedule
                 </button>
-              )}
               <ul>
                 {schedules &&
                   schedules.map((schedule) => {
