@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { EditReptileModal } from "./components/EditReptileModal/EditReptileModal";
 import { AddFeedingModal } from "./components/AddFeedingModal/AddFeedingModal";
 import "./Reptile.css";
+import { AddHusbandryRecordModal } from "./components/AddHusbandryRecordModal/AddHusbandryRecordModal";
 
 export const Reptile = () => {
   const { reptileId } = useParams(); // Assuming you're using react-router and reptileId is in the URL
@@ -18,10 +19,10 @@ export const Reptile = () => {
   const [husbandryRecords, setHusbandryRecords] = useState([]);
   const [isCreatingHusbandryRecord, setIsCreatingHusbandryRecord] =
     useState(false);
-  const [newLength, setNewLength] = useState(0);
-  const [newWeight, setNewWeight] = useState(0);
-  const [newTemperature, setNewTemperature] = useState(0);
-  const [newHumidity, setNewHumidity] = useState(0);
+  // const [newLength, setNewLength] = useState(0);
+  // const [newWeight, setNewWeight] = useState(0);
+  // const [newTemperature, setNewTemperature] = useState(0);
+  // const [newHumidity, setNewHumidity] = useState(0);
 
   const [isCreatingSchedule, setIsCreatingSchedule] = useState(false);
   const [schedules, setSchedules] = useState([]);
@@ -60,31 +61,31 @@ export const Reptile = () => {
     fetchData();
   }, [api, reptileId]);
 
-  const handleCreateHusbandryRecord = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+  // const handleCreateHusbandryRecord = async (e) => {
+  //   e.preventDefault(); // Prevent default form submission behavior
 
-    try {
-      const husbandryRecordInfo = {
-        reptileId: reptileId,
-        length: parseFloat(newLength),
-        weight: parseFloat(newWeight),
-        temperature: parseFloat(newTemperature),
-        humidity: parseFloat(newHumidity),
-      };
-      const res = await api.post(`/husbandry-records`, husbandryRecordInfo);
-      setIsCreatingHusbandryRecord(false); // Close the form
-      setNewLength(0); // Reset the form fields
-      setNewWeight(0);
-      setNewTemperature(0);
-      setNewHumidity(0);
-      // Optionally, fetch the updated list of feedings here to reflect the new addition
-      if (res.husbandryRecord) {
-        setHusbandryRecords((prev) => [...prev, res.husbandryRecord]);
-      }
-    } catch (error) {
-      console.error("Failed to create new feeding:", error);
-    }
-  };
+  //   try {
+  //     const husbandryRecordInfo = {
+  //       reptileId: reptileId,
+  //       length: parseFloat(newLength),
+  //       weight: parseFloat(newWeight),
+  //       temperature: parseFloat(newTemperature),
+  //       humidity: parseFloat(newHumidity),
+  //     };
+  //     const res = await api.post(`/husbandry-records`, husbandryRecordInfo);
+  //     setIsCreatingHusbandryRecord(false); // Close the form
+  //     setNewLength(0); // Reset the form fields
+  //     setNewWeight(0);
+  //     setNewTemperature(0);
+  //     setNewHumidity(0);
+  //     // Optionally, fetch the updated list of feedings here to reflect the new addition
+  //     if (res.husbandryRecord) {
+  //       setHusbandryRecords((prev) => [...prev, res.husbandryRecord]);
+  //     }
+  //   } catch (error) {
+  //     console.error("Failed to create new feeding:", error);
+  //   }
+  // };
 
   const handleCreateSchedule = async (e) => {
     e.preventDefault();
@@ -175,82 +176,13 @@ export const Reptile = () => {
             </div>
             <div className="col-md-3">
               <h2>Husbandry Records</h2>
-              {isCreatingHusbandryRecord ? (
-                <form onSubmit={handleCreateHusbandryRecord} className="mt-3">
-                  <h3>Create New Husbandry Record</h3>
-                  <div className="mb-3">
-                    <label htmlFor="length" className="form-label">
-                      Length:
-                    </label>
-                    <input
-                      id="length"
-                      type="number"
-                      className="form-control"
-                      step="0.01"
-                      value={newLength}
-                      onChange={(e) => setNewLength(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="weight" className="form-label">
-                      Weight:
-                    </label>
-                    <input
-                      id="weight"
-                      type="number"
-                      className="form-control"
-                      step="0.01"
-                      value={newWeight}
-                      onChange={(e) => setNewWeight(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="temperature" className="form-label">
-                      Temperature:
-                    </label>
-                    <input
-                      id="temperature"
-                      type="number"
-                      className="form-control"
-                      step="0.01"
-                      value={newTemperature}
-                      onChange={(e) => setNewTemperature(e.target.value)}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="humidity" className="form-label">
-                      Humidity:
-                    </label>
-                    <input
-                      id="humidity"
-                      type="number"
-                      className="form-control"
-                      step="0.01"
-                      value={newHumidity}
-                      onChange={(e) => setNewHumidity(e.target.value)}
-                    />
-                  </div>
-                  <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-                    <button type="submit" className="btn btn-primary me-2">
-                      Add Record
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setIsCreatingHusbandryRecord(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              ) : (
+              <AddHusbandryRecordModal show={isCreatingHusbandryRecord} onHide={() => setIsCreatingHusbandryRecord(false)} setHusbandryRecords={setHusbandryRecords}/>
                 <button
                   onClick={() => setIsCreatingHusbandryRecord(true)}
                   className="btn btn-primary"
                 >
                   Add New Husbandry Record
                 </button>
-              )}
               <ul>
                 {husbandryRecords &&
                   husbandryRecords.map((record) => (
