@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useApi } from "../utils/use_api";
+import "./Home.css";
 
 export const Home = () => {
   const token = window.localStorage.getItem("jwt");
@@ -8,13 +9,13 @@ export const Home = () => {
   const navigate = useNavigate();
   const api = useApi();
   async function getUser() {
-    try{
+    try {
       const body = await api.get("/users/me");
       setUser(body.user);
-    }
-    catch (error) {
-      console.error(error)
-      navigate("/login")
+      navigate("/dashboard");
+    } catch (error) {
+      console.error(error);
+      navigate("/login");
     }
   }
 
@@ -23,28 +24,18 @@ export const Home = () => {
       api.refreshToken();
       getUser();
     }
-  }, [])
+  }, []);
 
   return (
     <>
-      <div>
-        <h1>I am on the home page!</h1>
-        {token ? (
+      <div className="home-container">
+        {token && (
           <>
-            <div>{user && <h1>Welcome, {user.firstName}</h1>}</div>
-            <div><Link to="/dashboard">Dashboard</Link> </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <Link to="/login">Login</Link>
-            </div>
-            <div>
-              <Link to="/sign_up">Sign Up</Link>
-            </div>
+            <h1>Welcome!</h1>
+            <p>Description of what the app does</p>
           </>
         )}
       </div>
     </>
-  )
-}
+  );
+};
