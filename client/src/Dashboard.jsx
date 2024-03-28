@@ -14,6 +14,13 @@ export const Dashboard = () => {
   const api = useApi();
 
   useEffect(() => {
+    if (!api.token)
+    {
+      navigate("/login");
+    }
+  }, []);
+
+  useEffect(() => {
     // Fetch schedules for today
     const today = new Date()
       .toLocaleDateString("en-us", { weekday: "long" })

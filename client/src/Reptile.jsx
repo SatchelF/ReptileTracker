@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useApi } from "../utils/use_api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EditReptileModal } from "./components/EditReptileModal/EditReptileModal";
 import { AddFeedingModal } from "./components/AddFeedingModal/AddFeedingModal";
 import "./Reptile.css";
@@ -9,6 +9,7 @@ import AddScheduleModal from "./components/AddScheduleModal/AddScheduleModal";
 
 export const Reptile = () => {
   const { reptileId } = useParams(); // Assuming you're using react-router and reptileId is in the URL
+  const navigate = useNavigate();
   const api = useApi();
 
   const [reptile, setReptile] = useState(null);
@@ -20,24 +21,16 @@ export const Reptile = () => {
   const [husbandryRecords, setHusbandryRecords] = useState([]);
   const [isCreatingHusbandryRecord, setIsCreatingHusbandryRecord] =
     useState(false);
-  // const [newLength, setNewLength] = useState(0);
-  // const [newWeight, setNewWeight] = useState(0);
-  // const [newTemperature, setNewTemperature] = useState(0);
-  // const [newHumidity, setNewHumidity] = useState(0);
 
   const [schedules, setSchedules] = useState([]);
   const [isCreatingSchedule, setIsCreatingSchedule] = useState(false);
-  // const [newScheduleType, setNewScheduleType] = useState("feed");
-  // const [newDescription, setNewDescription] = useState("");
-  // const [days, setDays] = useState({
-  //   monday: false,
-  //   tuesday: false,
-  //   wednesday: false,
-  //   thursday: false,
-  //   friday: false,
-  //   saturday: false,
-  //   sunday: false,
-  // });
+
+  useEffect(() => {
+    if (!api.token)
+    {
+      navigate("/login");
+    }
+  });
 
   // Fetch reptile details and related data
   useEffect(() => {
@@ -61,38 +54,6 @@ export const Reptile = () => {
 
     fetchData();
   }, [api, reptileId]);
-
-  // const handleCreateSchedule = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const scheduleData = {
-  //       reptileId: parseInt(reptileId, 10), // Assuming reptileId comes from useParams and is a string
-  //       type: newScheduleType,
-  //       description: newDescription,
-  //       ...days,
-  //     };
-  //     const res = await api.post(`/schedules`, scheduleData);
-  //     // Reset form state
-  //     setIsCreatingSchedule(false);
-  //     setNewScheduleType("feed");
-  //     setNewDescription("");
-  //     setDays({
-  //       monday: false,
-  //       tuesday: false,
-  //       wednesday: false,
-  //       thursday: false,
-  //       friday: false,
-  //       saturday: false,
-  //       sunday: false,
-  //     });
-  //     if (res.schedule) {
-  //       setSchedules((prev) => [...prev, res.schedule]);
-  //     }
-  //   } catch (error) {
-  //     console.error("Failed to create new schedule:", error);
-  //   }
-  // };
 
   return (
     <>
