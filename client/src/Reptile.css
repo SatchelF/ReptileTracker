@@ -25,8 +25,8 @@
 }
 
 .reptile-container .btn-primary {
-    background-color: #556688;
-    border-color: #445566;
+    background-color: #ff3860; /* A vibrant color for delete buttons */
+    border-color: #ff3860;
     align-self: end;
 }
 .row{
@@ -34,8 +34,9 @@
 }
 
 .reptile-container .btn-primary:hover {
-    background-color: #667799;
-    border-color: #556688;
+    
+    background-color: #ff5e85; /* A lighter shade for hover state */
+    border-color: #ff5e85;
 }
 
 .reptile-container .form-control::placeholder {
@@ -46,15 +47,24 @@
     color: #ffffff;
 }
 
-.reptile-container .form-check-input {
+
+/* Reptile.css */
+.scrollable-list {
+    max-height: 300px;
+    overflow-y: auto;
     background-color: #242424;
-    border-color: #444444;
 }
 
-.scrollable-content {
-    max-height: 400px; 
-    overflow-y: auto;
+.list-group-item {
+    background-color: #333232;    
+    color: white;
+    border: 3px solid  rebeccapurple; /* Adds a subtle border for each item */
   }
+
+
+
+
+  
   
 .reptile-container .form-check-input:checked {
     background-color: #556688;
