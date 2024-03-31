@@ -6,6 +6,20 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString(undefined, options);
 };
 
+
+  // Function to convert snake_case to Title Case
+  const formatSpeciesName = (speciesName) => {
+    return speciesName
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  // Function to convert 'm' or 'f' to 'Male' or 'Female'
+  const formatSex = (sex) => {
+    return sex === 'm' ? 'Male' : sex === 'f' ? 'Female' : sex;
+  };
+
 const ReptileCard = ({ reptile, onSelect, onDelete }) => {
   return (
     <div className="col-md-4 mb-3 reptile-card">
@@ -14,8 +28,8 @@ const ReptileCard = ({ reptile, onSelect, onDelete }) => {
           <div className="d-flex justify-content-between">
             <div>
               <h3 className="card-title mb-3">Name: {reptile.name}</h3>
-              <h6 className="card-subtitle mb-2">Species: {reptile.species}</h6>
-              <p className="card-text mb-3">Sex: {reptile.sex}</p>
+              <h6 className="card-subtitle mb-2">Species: {formatSpeciesName(reptile.species)}</h6>
+              <p className="card-text mb-3">Sex: {formatSex(reptile.sex)}</p>
             </div>
             <div className="date-info text-end"> {/* Text alignment to the right */}
               <h6 className="card-subtitle mb-1 gray">Created: {formatDate(reptile.createdAt)}</h6>

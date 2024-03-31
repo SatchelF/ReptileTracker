@@ -10,6 +10,11 @@
     flex-direction: column;
 }
 
+.container{
+    background-color: #242424;
+    width: 100%;
+}
+
 .reptile-container .form-control {
     background-color: #242424;
     color: #ffffff;
@@ -23,6 +28,9 @@
     background-color: #556688;
     border-color: #445566;
     align-self: end;
+}
+.row{
+    width: 100%;
 }
 
 .reptile-container .btn-primary:hover {
@@ -43,6 +51,11 @@
     border-color: #444444;
 }
 
+.scrollable-content {
+    max-height: 400px; 
+    overflow-y: auto;
+  }
+  
 .reptile-container .form-check-input:checked {
     background-color: #556688;
 }

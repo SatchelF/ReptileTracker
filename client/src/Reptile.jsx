@@ -25,6 +25,36 @@ export const Reptile = () => {
   const [schedules, setSchedules] = useState([]);
   const [isCreatingSchedule, setIsCreatingSchedule] = useState(false);
 
+
+  const formatSpeciesName = (speciesName) => {
+    return speciesName
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  // Function to convert 'm' or 'f' to 'Male' or 'Female'
+  const formatSex = (sex) => {
+    return sex === 'm' ? 'Male' : sex === 'f' ? 'Female' : sex;
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString('en-US', {
+      weekday: 'long', // "Monday"
+      year: 'numeric', // "2024"
+      month: 'long', // "March"
+      day: 'numeric', // "31"
+    });
+    const formattedTime = date.toLocaleTimeString('en-US', {
+      hour: '2-digit', // "01"
+      minute: '2-digit', // "58"
+      second: '2-digit', // "31"
+      hour12: true, // "AM" or "PM"
+    });
+    return `${formattedDate} at ${formattedTime}`;
+  }
+
   useEffect(() => {
     if (!api.token)
     {
@@ -73,8 +103,8 @@ export const Reptile = () => {
               {reptile && (
                 <div>
                   <p>Name: {reptile.name}</p>
-                  <p>Sex: {reptile.sex}</p>
-                  <p>Species: {reptile.species}</p>
+                  <p>Sex: {formatSex(reptile.sex)}</p>
+                  <p>Species: {formatSpeciesName(reptile.species)}</p>
                   {/* Add more reptile details as needed */}
                 </div>
               )}
@@ -105,7 +135,7 @@ export const Reptile = () => {
                 {feedings &&
                   feedings.map((feeding) => (
                     <li key={feeding.id}>
-                      Food: {feeding.foodItem} - Date: {feeding.createdAt}
+                      Food: {feeding.foodItem} - Date: {formatDate(feeding.createdAt)}
                     </li>
                   ))}
               </ul>
@@ -138,6 +168,7 @@ export const Reptile = () => {
                 >
                   Add New Schedule
                 </button>
+                <div className="scrollable-container">
               <ul>
                 {schedules &&
                   schedules.map((schedule) => {
@@ -169,6 +200,7 @@ export const Reptile = () => {
                     );
                   })}
               </ul>
+              </div>
             </div>
           </div>
         </div>
